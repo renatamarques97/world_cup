@@ -1,0 +1,2 @@
+class OverallRanking < ApplicationRecord
+end
