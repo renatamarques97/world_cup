@@ -1,0 +1,13 @@
+en:
+  status:
+    success: "SUCCESS"
+    error: "ERROR"
+
+  messages:
+    success: "Succcessfully Loaded"
+
+  team:
+    new:
+      valid: "Team Succcessfully Saved"
+      invalid: "Team wasn`t Saved"
+      
