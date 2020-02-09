@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_07_225019) do
+ActiveRecord::Schema.define(version: 2020_02_09_151451) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,8 @@ ActiveRecord::Schema.define(version: 2020_02_07_225019) do
     t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "tournament_id", null: false
+    t.index ["tournament_id"], name: "index_groups_on_tournament_id"
   end
 
   create_table "match_results", force: :cascade do |t|
@@ -62,6 +64,8 @@ ActiveRecord::Schema.define(version: 2020_02_07_225019) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "tournament_id", null: false
+    t.index ["tournament_id"], name: "index_phases_on_tournament_id"
   end
 
   create_table "teams", force: :cascade do |t|
@@ -72,12 +76,21 @@ ActiveRecord::Schema.define(version: 2020_02_07_225019) do
     t.index ["group_id"], name: "index_teams_on_group_id"
   end
 
+  create_table "tournaments", force: :cascade do |t|
+    t.string "name"
+    t.string "state", default: "none"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   add_foreign_key "group_rankings", "groups"
   add_foreign_key "group_rankings", "teams"
+  add_foreign_key "groups", "tournaments"
   add_foreign_key "match_results", "matches"
   add_foreign_key "match_results", "teams"
   add_foreign_key "matches", "phases"
   add_foreign_key "matches", "teams", column: "team_a_id"
   add_foreign_key "matches", "teams", column: "team_b_id"
+  add_foreign_key "phases", "tournaments"
   add_foreign_key "teams", "groups"
 end
