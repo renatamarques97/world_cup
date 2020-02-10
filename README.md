@@ -1,27 +1,27 @@
 # World Cup
 
-* Ruby version
+## Ruby version
 2.6.4
 
-* Rails version
+## Rails version
 6.0.2.1
 
-* System dependencies
+## System dependencies
 Postgresql
 
-* Configuration
+## Configuration
 `bundle install` `yarn install`
 
-* Database creation
+## Database creation
 `rails db:create`
 
-* Database initialization
+## Database initialization
 `rails db:migrate` `rails db:seed`
 
-* How to run the test suite
+## How to run the test suite
 `bundle exec rspec`
 
-* Run the API server
+## Run the API server
 `rails server`
 
-* Documentation
+## Documentation
