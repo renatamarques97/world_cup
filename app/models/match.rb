@@ -1,7 +1,8 @@
 class Match < ApplicationRecord
-  has_many :match_results, class_name: "MatchResult"
-  has_one :team, class_name: "Team", foreign_key: "team_a_id", as: :team_a
-  has_one :team, class_name: "Team", foreign_key: "team_b_id", as: :team_b
+  has_many :match_results, class_name: 'MatchResult'
+  belongs_to :team_a, class_name: 'Team'
+  belongs_to :team_b, class_name: 'Team'
+  belongs_to :phase, class_name: 'Phase'
 
   def played?
   end
