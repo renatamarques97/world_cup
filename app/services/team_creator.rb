@@ -35,7 +35,7 @@ class TeamCreator
   def incomplete_group
     group = Group.all.sample
 
-    while group.teams.count > 3
+    while group.teams.count > 2
       group = Group.all.sample
     end
 
