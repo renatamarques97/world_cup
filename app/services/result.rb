@@ -1,38 +1,46 @@
 # frozen_string_literal: true
 
 class Result
-  attr_reader :team_a, :team_b
+  attr_reader :match_result_params
 
   def initialize(match_result_params:)
-    @team_a = match_result_params[:team_a]
-    @team_b = match_result_params[:team_b]
+    @match_result_params = match_result_params
   end
 
   def match_result
-    match = Match.where(team_a_id: team_a[:id], team_b_id: team_b[:id]).first
+    return match_result_single(match_result_params) if match_result_params[:matches].nil?
 
-    return false if match.nil? || match.played
+    match_result_list
+  end
 
-    result_team_a = nil
-    result_team_b = nil
+  def match_result_single(result_params)
+    match = Match.find(result_params[:id])
 
-    if team_a[:goals] > team_b[:goals]
-      result_team_a = 'win'
-      result_team_b = 'defeat'
-    elsif team_a[:goals] < team_b[:goals]
-      result_team_a = 'defeat'
-      result_team_b = 'win'
-    else
-      result_team_a = 'draw'
-      result_team_b = 'draw'
+    return false if match.nil? || match.played || !current_phase?(match)
+
+    team_a_goals = result_params[:team_a_goals]
+    team_b_goals = result_params[:team_b_goals]
+
+    created_matches_results(match, team_a_goals, team_b_goals)
+  end
+
+  def match_result_list
+    match_result_params[:matches].each do |result_params|
+      match_result_single(result_params)
     end
+  end
+
+  def created_matches_results(match, team_a_goals, team_b_goals)
+    result_game = result_game(team_a_goals, team_b_goals)
+    result_team_a = result_game.first
+    result_team_b = result_game.second
 
     match_result_team_a = MatchResult.new(result: result_team_a,
-                                          goals: team_a[:goals],
+                                          goals: team_a_goals,
                                           team_id: match.team_a_id,
                                           match_id: match.id)
     match_result_team_b = MatchResult.new(result: result_team_b,
-                                          goals: team_b[:goals],
+                                          goals: team_b_goals,
                                           team_id: match.team_b_id,
                                           match_id: match.id)
     match_result_team_a.save
@@ -41,4 +49,21 @@ class Result
     match.played = true
     match.save
   end
+
+  private
+
+  def current_phase?(match)
+    match.phase[:name] == Tournament.find(match.phase_id).state
+  end
+
+  def result_game(team_a_goals, team_b_goals)
+    if team_a_goals > team_b_goals
+      ['win', 'defeat']
+    elsif team_a_goals < team_b_goals
+      ['defeat', 'win']
+    else
+      ['draw', 'draw']
+    end
+  end
+
 end
