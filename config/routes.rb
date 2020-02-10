@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   namespace 'api' do
-    resources :teams
-    resources :states_tournament
     resources :rankings
     resources :results
+    resources :states_tournament
+    resources :teams
   end
 end
