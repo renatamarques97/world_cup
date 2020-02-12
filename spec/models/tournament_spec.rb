@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Tournament, type: :model do
-  describe 'tournament' do
+  describe '#next_phase' do
     context '#aasm' do
       it 'when state is none' do
         expect(subject.state).to eq("none")
