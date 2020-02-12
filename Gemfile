@@ -16,6 +16,7 @@ gem 'aasm'
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'pry'
+  gem 'pry-nav'
   gem 'rspec-rails'
 end
 
@@ -32,7 +33,7 @@ group :test do
   gem 'selenium-webdriver'
   gem 'webdrivers'
   gem 'factory_bot_rails'
-  gem 'faker'
+  gem 'ffaker'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
