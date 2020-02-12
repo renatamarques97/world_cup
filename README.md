@@ -96,7 +96,7 @@ current phase [none, first, second, semifinal, final], list
 of teams with IDs, next matches and played matches.
 
 GET
-`localhost:3000/api/states_tournament`
+`localhost:3000/api/states_tournament?tournament_id=1`
 ```json
 {
     "status": "SUCCESS",
@@ -253,7 +253,7 @@ Read endpoint of ranking, ranking is a list of teams,
 IDs and positions.
 
 GET
-`localhost:3000/api/rankings`
+`localhost:3000/api/rankings?tournament_id=1`
 ```json
 {
     "status": "SUCCESS",
