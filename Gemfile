@@ -34,6 +34,8 @@ group :test do
   gem 'ffaker'
   gem 'selenium-webdriver'
   gem 'simplecov', require: false
+  gem 'shoulda'
+  gem 'shoulda-matchers'
   gem 'webdrivers'
 end
 
