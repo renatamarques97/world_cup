@@ -2,12 +2,19 @@ en:
   status:
     success: "SUCCESS"
     error: "ERROR"
-
   messages:
     success: "Succcessfully Loaded"
-
+  ranking:
+    new:
+      valid: "Ranking Succcessfully Loaded"
+  result:
+    new:
+      valid: "Result Succcessfully Saved"
+      invalid: "Result wasn`t Saved"
   team:
     new:
       valid: "Team Succcessfully Saved"
       invalid: "Team wasn`t Saved"
-      
+  states_tournament:
+    new:
+      valid: "State Tournament Succcessfully Loaded"
