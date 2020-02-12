@@ -4,7 +4,6 @@ class CreateMatches < ActiveRecord::Migration[6.0]
       t.boolean :played
       t.references :team_a, null: false, foreign_key: { to_table: 'teams' }
       t.references :team_b, null: false, foreign_key: { to_table: 'teams' }
-      t.references :phase, null: false, foreign_key: { to_table: 'phases' }
 
       t.timestamps
     end
