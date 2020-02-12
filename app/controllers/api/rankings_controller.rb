@@ -1,11 +1,23 @@
+# frozen_string_literal: true
+
 module Api
   class RankingsController < ApplicationController
     def index
-      ranking = Ranking.new
+      ranking = OverallRanking.where(tournament_id: params[:tournament_id]).order("position")
 
-      render json: { status: I18n.t('status.success'),
-                      message: I18n.t('team.new.valid'),
-                      data: ranking.ranking }, status: :ok
+      results = ranking.map do |p|
+        {
+          position: p.position,
+          name: p.team.name,
+          team_id: p.team.id
+        }
+      end
+
+      render json: {
+        status: I18n.t('status.success'),
+        message: I18n.t('ranking.new.valid'),
+        data: results
+      }, status: :ok
     end
   end
 end
